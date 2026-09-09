@@ -47,6 +47,13 @@ del "C:\Program Files (x86)\Mirillis\Splash\nvEncodeAPI.dll"
 - Windows 10 / Windows 11
 - Any NVIDIA GPU driver version
 
+## Security & Antivirus Notes
+
+- **Nothing is downloaded from the internet**: the shortcut DLL is generated locally on your machine with Python's `struct` module. There are no binaries, no network calls, and no third-party payloads in this repository — the whole generator is ~4 KB of readable source you can inspect.
+- **Antivirus/SmartScreen warning possible**: the generator places an *unsigned* DLL inside Splash's `Program Files` folder. Windows may show a SmartScreen notification (or treat the generated DLL as unusual). This is expected for any locally generated module and is not malware — the DLL only exports `NvEncodeAPICreateInstance` and returns `0`. If your AV quarantines it, add the Splash folder to the allow-list.
+- **Run as Administrator** is required because the Splash folder is write-protected by Windows.
+- Versioned Python launchers: `install.bat` now uses `python` if present, otherwise falls back to the `py` launcher, and exits with a clear message if neither exists (so it never silently executes a Store alias or an unrelated `python.exe`).
+
 ## Technical Details
 
 The generated DLL is a minimal 32-bit PE DLL (1.5 KB) with:

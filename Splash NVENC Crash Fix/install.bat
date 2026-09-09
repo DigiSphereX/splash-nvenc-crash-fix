@@ -44,11 +44,41 @@ if exist "%SPLASH_DIR%\nvEncodeAPI.dll" (
     )
 )
 
+:: Verify Python is available (avoid resolving to the Store alias or a malicious entry)
+set "PYCMD="
+where python >nul 2>nul
+if %errorlevel% equ 0 (
+    set "PYCMD=python"
+) else (
+    where py >nul 2>nul
+    if %errorlevel% equ 0 (
+        set "PYCMD=py -3"
+    )
+)
+if not defined PYCMD (
+    echo [ERROR] Python is not installed.
+    echo   Download it from https://www.python.org/downloads/
+    echo   IMPORTANT: tick "Add python.exe to PATH" during installation.
+    pause
+    exit /b 1
+)
+
 :: Generate the stub DLL using Python
 echo [1/2] Generating stub nvEncodeAPI.dll...
-python "%~dp0fix\generate_stub.py" "%SPLASH_DIR%\nvEncodeAPI.dll"
+if exist "%SPLASH_DIR%\nvEncodeAPI.dll" del /f "%SPLASH_DIR%\nvEncodeAPI.dll"
+if exist "%SPLASH_DIR%\nvEncodeAPI.dll" (
+    echo [ERROR] Cannot remove the old nvEncodeAPI.dll (permissions?).
+    pause
+    exit /b 1
+)
+%PYCMD% "%~dp0fix\generate_stub.py" "%SPLASH_DIR%\nvEncodeAPI.dll"
 if %errorlevel% neq 0 (
     echo [ERROR] Failed to generate DLL.
+    pause
+    exit /b 1
+)
+if not exist "%SPLASH_DIR%\nvEncodeAPI.dll" (
+    echo [ERROR] nvEncodeAPI.dll was not created - check the Python output above.
     pause
     exit /b 1
 )

@@ -124,9 +124,22 @@ def main():
         out = os.path.join(os.getcwd(), 'nvEncodeAPI.dll')
 
     print(f'Generating stub DLL: {out}')
-    generate_nvenc_stub(out)
-    size = os.path.getsize(out)
+    try:
+        generate_nvenc_stub(out)
+    except PermissionError as e:
+        print(f'[ERROR] Cannot write to "{out}".', file=sys.stderr)
+        print('        Run this script as Administrator (the game folder is protected).', file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f'[ERROR] Failed to generate the DLL: {e}', file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        size = os.path.getsize(out)
+    except OSError:
+        size = -1
     print(f'Done! File size: {size} bytes')
+    print('Integrity: generated purely with Python structs, no external binaries used.')
 
 
 if __name__ == '__main__':
