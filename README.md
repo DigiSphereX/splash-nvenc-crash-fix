@@ -62,3 +62,12 @@ The generated DLL is a minimal 32-bit PE DLL (1.5 KB) with:
 - No external dependencies
 
 The stub is generated purely with Python's `struct` module — no compiler needed.
+
+---
+
+## ☕ Support this project
+
+Free and open source (MIT). If this fix saved you time or money, consider a small thank-you:
+
+- **GitHub Sponsors** -> https://github.com/sponsors/DigiSphereX
+- **PayPal** -> https://www.paypal.com/donate/?hosted_button_id=CFANQH892RPH2
