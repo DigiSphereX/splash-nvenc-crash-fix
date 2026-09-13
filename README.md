@@ -63,6 +63,15 @@ The generated DLL is a minimal 32-bit PE DLL (1.5 KB) with:
 
 The stub is generated purely with Python's `struct` module — no compiler needed.
 
+## Disclaimer / Backup advice
+
+Use this fix at your own risk. Before applying it: read the generator (about 4 KB of
+plain, readable Python), **back up** the original `nvEncodeAPI.dll` you replace, and
+create a system restore point. The fix places an unsigned DLL in Splash's
+`Program Files` folder (Administrator required) and only disables NVENC - a fix that
+works on most machines can behave unexpectedly on a specific setup. The author is
+not responsible for any unintentional damage or data loss.
+
 ---
 
 ## ☕ Support this project
