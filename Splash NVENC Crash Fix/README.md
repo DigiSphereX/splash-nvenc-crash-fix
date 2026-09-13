@@ -63,3 +63,10 @@ source), **back up** the original `nvEncodeAPI.dll` you replace, and create a sy
 restore point. The fix places an unsigned DLL in Splash's `Program Files` folder
 (requires Administrator) and only disables NVENC. The author is not responsible for
 any unintentional damage or data loss.
+
+## ☕ Support this project
+
+Free and open source (MIT). If this project saved you time or money, consider a small thank-you:
+
+- **GitHub Sponsors** -> https://github.com/sponsors/DigiSphereX
+- **PayPal** -> https://www.paypal.com/donate/?hosted_button_id=CFANQH892RPH2
