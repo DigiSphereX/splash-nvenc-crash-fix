@@ -76,6 +76,13 @@ not responsible for any unintentional damage or data loss.
 
 ---
 
+## License
+
+MIT - see [LICENSE](LICENSE). The replacement `nvEncodeAPI.dll` is the property of
+NVIDIA and is provided for compatibility; it is not re-distributed for any other purpose.
+
+---
+
 ## ☕ Support this project
 
 Free and open source (MIT). If this project saved you time or money, consider a small thank-you:
